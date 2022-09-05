@@ -3,6 +3,7 @@ import { Product } from 'libs/entity/src/Product.entity';
 import { ProductController } from './product-service.controller';
 import { ProductService } from './product-service.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { User } from '@app/entity/User.entity';
 
 @Module({
   imports: [
@@ -13,10 +14,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       username: 'thai-bug',
       password: '12022021',
       database: 'dev',
-      entities: [Product],
+      entities: [Product, User],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([Product,])
+    TypeOrmModule.forFeature([Product])
   ],
   controllers: [ProductController],
   providers: [ProductService],

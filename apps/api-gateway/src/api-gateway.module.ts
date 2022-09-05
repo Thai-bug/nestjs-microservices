@@ -19,6 +19,9 @@ import { join } from 'path';
 import { Product } from 'libs/entity/src/Product.entity';
 import { ProductController } from './product/product.controller';
 import { ProductService } from './product/product.service';
+import { UserService } from './user/user.service';
+import { UserController } from './user/user.controller';
+import { Role, User } from '@app/entity/User.entity';
 @Module({
   imports: [
     // ServeStaticModule.forRoot({
@@ -31,13 +34,18 @@ import { ProductService } from './product/product.service';
       username: 'thai-bug',
       password: '12022021',
       database: 'dev',
-      entities: [Product]
-    })
+      entities: [Product, User, Role]
+    }),
+    TypeOrmModule.forFeature([Product,User, Role])
   ],
-  controllers: [ProductController],
-  providers: [ProductService,
+  controllers: [
+    ProductController,
+    UserController
+  ],
+  providers: [
+    ProductService,
+    UserService,
     {
-
       provide: 'PRODUCT_SERVICE',
       useFactory: (configService: ConfigService) =>
         ClientProxyFactory.create({
@@ -50,7 +58,22 @@ import { ProductService } from './product/product.service';
             },
           },
         }),
-    }]
+    },
+    {
+      provide: 'USER_SERVICE',
+      useFactory: (configService: ConfigService) =>
+        ClientProxyFactory.create({
+          transport: Transport.RMQ,
+          options: {
+            urls: ['amqp://localhost:5672'],
+            queue: 'users_queue',
+            queueOptions: {
+              durable: false
+            },
+          },
+        }),
+    },
+  ]
 
 })
-export class ApiGatewayModule {}
+export class ApiGatewayModule { }
