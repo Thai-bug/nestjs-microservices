@@ -11,7 +11,7 @@ export class Product {
   id: number
 
   @Column('varchar', {nullable: true, default: ''})
-  name: string
+  title: string
 
   @Column('int', {nullable: true, default: 0})
   price: number
@@ -19,6 +19,6 @@ export class Product {
   @Column('varchar', {nullable: true, default: ''})
   description: string
 
-  @Column('boolean', { default: true })
-  status: boolean
+  @Column('int', { default: 1 })
+  status: number
 }

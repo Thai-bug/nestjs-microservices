@@ -13,6 +13,9 @@ export class ProductService {
   ) { }
 
   async getProducts(): Promise<string> {
-    return await firstValueFrom(this.client.send('get_products', 'Hello world'));
+    return await firstValueFrom(this.client.send('get_products', {
+      title: 'h',
+      status: 2
+    }));
   }
 }
