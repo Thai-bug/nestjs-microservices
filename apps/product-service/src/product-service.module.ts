@@ -14,7 +14,7 @@ import { User } from '@app/entity/User.entity';
       username: 'thai-bug',
       password: '12022021',
       database: 'dev',
-      entities: [Product, User],
+      entities: [Product],
       synchronize: true,
     }),
     TypeOrmModule.forFeature([Product])

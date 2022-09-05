@@ -6,9 +6,14 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class UserService {
   constructor(
-    @InjectRepository(User) private readonly productRepository: Repository<User>,
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
   ) { }
-  getHello(): string {
+  async getHello() {
+    console.log(await this.userRepository.find({
+      where: {
+        id: 1
+      }
+    }))
     return 'Hello World!';
   }
 }
