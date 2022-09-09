@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -21,10 +22,11 @@ export class User {
   @Column('text', { nullable: false })
   password: string;
 
-  @Column('text', { nullable: false, default: () => 'CURRENT_TIMESTAMP' })
+  @Column('text', {name: 'created_at', nullable: false, default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
-  @ManyToOne(() => Role, role => role.users)
+  @ManyToOne(() => Role, role => role.users, )
+  @JoinColumn({name: 'role_id'})
   role: Relation<Role>;
 }
 
@@ -36,7 +38,7 @@ export class Role {
   @Column('text', { nullable: false })
   name: string;
 
-  @Column('text', { nullable: false, default: () => 'CURRENT_TIMESTAMP' })
+  @Column('text', {name: 'created_at', nullable: false, default: () => 'CURRENT_TIMESTAMP' })
   createdAt: Date;
 
   @OneToMany(() => User, user => user.role)
