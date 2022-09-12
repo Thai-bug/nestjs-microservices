@@ -22,6 +22,8 @@ import { ProductService } from './product/product.service';
 import { UserService } from './user/user.service';
 import { UserController } from './user/user.controller';
 import { Role, User } from '@app/entity/User.entity';
+import { AuthController } from './auth/auth.controller';
+import { AuthService } from './auth/auth.service';
 @Module({
   imports: [
     // ServeStaticModule.forRoot({
@@ -36,15 +38,17 @@ import { Role, User } from '@app/entity/User.entity';
       database: 'dev',
       entities: [Product, User, Role]
     }),
-    TypeOrmModule.forFeature([Product,User, Role])
+    TypeOrmModule.forFeature([Product, User, Role])
   ],
   controllers: [
     ProductController,
-    UserController
+    UserController,
+    AuthController
   ],
   providers: [
     ProductService,
     UserService,
+    AuthService,
     {
       provide: 'PRODUCT_SERVICE',
       useFactory: (configService: ConfigService) =>
@@ -67,6 +71,20 @@ import { Role, User } from '@app/entity/User.entity';
           options: {
             urls: ['amqp://localhost:5672'],
             queue: 'users_queue',
+            queueOptions: {
+              durable: false
+            },
+          },
+        }),
+    },
+    {
+      provide: 'AUTH_SERVICE',
+      useFactory: (configService: ConfigService) =>
+        ClientProxyFactory.create({
+          transport: Transport.RMQ,
+          options: {
+            urls: ['amqp://localhost:5672'],
+            queue: 'auth_queue',
             queueOptions: {
               durable: false
             },
