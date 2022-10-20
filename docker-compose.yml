@@ -2,6 +2,7 @@ version: "3.7"
 
 services: 
   g1:
+    image: api-gateway
     build: ./apps/api-gateway
     restart: on-failure
     ports:
