@@ -4,7 +4,7 @@ WORKDIR /home/app
 
 COPY ./apps/api-gateway ./
 
-COPY ./libs ./
+COPY ./libs ./libs
 
 COPY tsconfig.json ./
 
