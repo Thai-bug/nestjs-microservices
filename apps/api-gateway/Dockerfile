@@ -2,9 +2,9 @@ FROM node:16.17-alpine3.15
 
 WORKDIR /home/app
 
-COPY . ./
+COPY ./apps/api-gateway ./
 
-COPY ../../package.json ./
+COPY package.json ./
 
 RUN npm install pm2 -g
 
