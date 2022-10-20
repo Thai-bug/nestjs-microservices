@@ -1,0 +1,8 @@
+version: "3.7"
+
+services: 
+  g1:
+    build: ./app/api-gateway
+    restart: on-failure
+    ports:
+      - "2712:3000"
