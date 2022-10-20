@@ -55,7 +55,7 @@ import { AuthService } from './auth/auth.service';
         ClientProxyFactory.create({
           transport: Transport.RMQ,
           options: {
-            urls: ['amqp://localhost:5672'],
+            urls: ['amqp://35.240.138.31:5672'],
             queue: 'products_queue',
             queueOptions: {
               durable: false
@@ -69,7 +69,7 @@ import { AuthService } from './auth/auth.service';
         ClientProxyFactory.create({
           transport: Transport.RMQ,
           options: {
-            urls: ['amqp://localhost:5672'],
+            urls: ['amqp://35.240.138.31:5672'],
             queue: 'users_queue',
             queueOptions: {
               durable: false
@@ -83,7 +83,7 @@ import { AuthService } from './auth/auth.service';
         ClientProxyFactory.create({
           transport: Transport.RMQ,
           options: {
-            urls: ['amqp://localhost:5672'],
+            urls: ['amqp://35.240.138.31:5672'],
             queue: 'auth_queue',
             queueOptions: {
               durable: false
