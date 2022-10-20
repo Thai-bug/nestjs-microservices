@@ -10,6 +10,8 @@ COPY tsconfig.json ./
 
 COPY package.json ./
 
+RUN ls -la
+
 RUN npm install pm2 -g
 
 RUN npm i
