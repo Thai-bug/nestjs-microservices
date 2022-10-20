@@ -4,6 +4,8 @@ WORKDIR /home/app
 
 COPY ./apps/api-gateway ./
 
+COPY tsconfig.json ./
+
 COPY package.json ./
 
 RUN npm install pm2 -g
