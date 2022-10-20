@@ -4,6 +4,8 @@ WORKDIR /home/app
 
 COPY ./apps/api-gateway ./
 
+COPY ./libs ./
+
 COPY tsconfig.json ./
 
 COPY package.json ./
